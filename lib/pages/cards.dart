@@ -10,6 +10,20 @@ class Cards extends StatefulWidget {
 class _CardsState extends State<Cards> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Cartões'),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/');
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
+      ),
+      body: Center(child: Text('Logado')),
+    );
   }
 }
