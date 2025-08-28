@@ -24,7 +24,6 @@ class AddCard extends StatelessWidget {
               TextFormField(
                 decoration: InputDecoration(labelText: 'Flag'),
                 controller: _flagController,
-                obscureText: true,
               ),
               ElevatedButton(
                 onPressed: () {

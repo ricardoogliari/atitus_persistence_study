@@ -11,16 +11,12 @@ class Cards extends StatefulWidget {
 }
 
 class _CardsState extends State<Cards> {
-  List<CreditCard>? cards = null;
+  List<CreditCard>? _cards;
 
   @override
   Widget build(BuildContext context) {
-    if (cards == null) {
-      listCards().then((value) {
-        setState(() {
-          cards = value;
-        });
-      });
+    if (_cards == null) {
+      _loadCards();
     }
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +24,10 @@ class _CardsState extends State<Cards> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/add');
+              Navigator.pushNamed(
+                context,
+                '/add',
+              ).then((value) => _loadCards());
             },
             icon: Icon(Icons.add),
           ),
@@ -43,12 +42,33 @@ class _CardsState extends State<Cards> {
       ),
       body: Center(
         child:
-            cards == null
-                ? CircularProgressIndicator()
-                : cards!.isEmpty
-                ? Text('Nenhum cartão adicionado')
-                : Text('Você possui ${cards!.length} cartões'),
+            _cards == null
+                ? _loading()
+                : _cards!.isEmpty
+                ? _withoutCards()
+                : _showCards(),
       ),
     );
   }
+
+  void _loadCards() {
+    listCards().then((value) {
+      setState(() {
+        _cards = value;
+      });
+    });
+  }
+
+  Widget _withoutCards() => Text('Nenhum cartão adicionado');
+
+  Widget _loading() => CircularProgressIndicator();
+
+  Widget _showCards() => ListView.separated(
+    itemBuilder: (context, index) => _buildItem(card: _cards![index]),
+    separatorBuilder: (context, index) => Divider(),
+    itemCount: _cards!.length,
+  );
+
+  Widget _buildItem({required CreditCard card}) =>
+      ListTile(title: Text(card.number), subtitle: Text(card.flag));
 }
