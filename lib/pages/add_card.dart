@@ -25,6 +25,7 @@ class AddCard extends StatelessWidget {
                 decoration: InputDecoration(labelText: 'Flag'),
                 controller: _flagController,
               ),
+              SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   insertCard(

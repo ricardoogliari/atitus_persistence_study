@@ -20,6 +20,7 @@ class Login extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: Form(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
                 decoration: InputDecoration(labelText: 'User'),
@@ -30,6 +31,7 @@ class Login extends StatelessWidget {
                 controller: _passwordController,
                 obscureText: true,
               ),
+              SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   login();
