@@ -1,3 +1,4 @@
+import 'package:atitus_persistence_study/nosql_persistence/nosql_manager.dart';
 import 'package:flutter/material.dart';
 
 class Cards extends StatefulWidget {
@@ -17,6 +18,7 @@ class _CardsState extends State<Cards> {
           IconButton(onPressed: () {}, icon: Icon(Icons.add)),
           IconButton(
             onPressed: () {
+              logoff();
               Navigator.pushReplacementNamed(context, '/');
             },
             icon: Icon(Icons.logout),
